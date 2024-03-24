@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+  alura-db:
+    container_name: alura
+    image: mysql:8.0
+    networks:
+      - alura-network
+    environment:
+      - MYSQL_USER=alura
+      - MYSQL_PASSWORD=alura
+      - MYSQL_DATABASE=alura
+      - MYSQL_ROOT_PASSWORD=alura
+    volumes:
+      - dbvol:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+
+  alura-app:
+    build:
+      context: .
+    container_name: alura-test
+    restart: always
+    image: backend:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - alura-network
+    depends_on:
+      - alura-db
+    environment:
+      - MYSQL_HOST=alura
+      - MYSQL_USERNAME=alura
+      - MYSQL_PASSWORD=alura
+      - MYSQL_DATABASE=alura
+      - MYSQL_PORT=3306
+
+networks:
+  alura-network:
+    name: alura-network
+
+volumes:
+  dbvol:
