@@ -70,7 +70,7 @@ public class CourseTest {
     @Order(4)
     void shouldDisableCourse() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/admin/courses/disable/1"))
+        mockMvc.perform(MockMvcRequestBuilders.patch("/admin/courses/disable/javac"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -79,7 +79,7 @@ public class CourseTest {
     @Order(5)
     void shouldNotDisableNonExistingCourse() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.patch("/admin/courses/disable/2"))
+        mockMvc.perform(MockMvcRequestBuilders.patch("/admin/courses/disable/java"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 

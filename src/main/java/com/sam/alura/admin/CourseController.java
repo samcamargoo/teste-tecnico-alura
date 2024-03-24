@@ -39,12 +39,12 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PatchMapping("/disable/{courseId}")
+    @PatchMapping("/disable/{courseCode}")
     @Secured("ROLE_ADMIN")
     @Transactional
-    ResponseEntity<?> disableCourse(@PathVariable("courseId") Long courseId) {
+    ResponseEntity<?> disableCourse(@PathVariable("courseCode") String courseCode) {
 
-        Course course = courseRepository.findById(courseId).orElseThrow(() -> new AppException("course not found"));
+        Course course = courseRepository.findByCode(courseCode).orElseThrow(() -> new AppException("course not found"));
         course.inactivate();
         return ResponseEntity.ok().build();
     }
