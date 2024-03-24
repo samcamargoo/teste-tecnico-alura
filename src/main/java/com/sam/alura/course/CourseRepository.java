@@ -11,6 +11,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Page<Course> findByStatus(Pageable pageable, CourseStatus status);
     boolean existsByIdAndStatus(Long id, CourseStatus status);
+    Optional<Course> findByCode(String code);
 
     @Query("SELECT c FROM Course c WHERE SIZE(c.enrollments) > 4")
     Page<Course> findCoursesWithMoreThanFourEnrollments(Pageable pageable);
