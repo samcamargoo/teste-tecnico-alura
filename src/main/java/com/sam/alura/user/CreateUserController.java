@@ -6,22 +6,27 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
 class CreateUserController {
 
+    private final RoleRepository roleRepository;
+
+    public CreateUserController(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+
     @PersistenceContext
     private EntityManager entityManager;
+
     @PostMapping
     @Transactional
     ResponseEntity<?> createUser(@RequestBody @Valid NewUserRequest request) {
-        User user = request.toModel();
-        entityManager.persist(user);
+        ApplicationUser userEntity = request.toModel(roleRepository);
+        entityManager.persist(userEntity);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 }
