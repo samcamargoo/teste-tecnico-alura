@@ -1,8 +1,8 @@
 package com.sam.alura.course;
 
 import com.sam.alura.shared.MustBeInstructor;
-import com.sam.alura.shared.Unique;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.shared.UniqueField;
+import com.sam.alura.user.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public record NewCourseRequest(@NotBlank(message = "is required") String name,
-                               @Unique(fieldName = "code", domainClass = Course.class)
+                               @UniqueField(fieldName = "code", domainClass = Course.class)
                                @Pattern(regexp = "^[a-zA-Z]+(?:-[a-zA-Z]+)*$", message = "is invalid")
                                @Length(max = 10, message = "must be equal or less than 10")
                                String code,
@@ -25,9 +25,9 @@ public record NewCourseRequest(@NotBlank(message = "is required") String name,
                                String description
 ) {
 
-    public Course toModel(Function<Long, ApplicationUser> loadUser) {
+    public Course toModel(Function<Long, User> loadUser) {
         @NotNull
-        ApplicationUser instructor = loadUser.apply(instructorId);
+        User instructor = loadUser.apply(instructorId);
         Assert.state(Objects.nonNull(instructor), "Instructor not found");
         return new Course(name, code, instructor, description);
     }
