@@ -1,6 +1,6 @@
 package com.sam.alura.course;
 
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import jakarta.persistence.*;
 import org.springframework.util.Assert;
 
@@ -15,7 +15,7 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    private ApplicationUser user;
+    private User user;
     @ManyToOne(fetch = FetchType.LAZY)
     private Course course;
     private LocalDateTime registrationDate;
@@ -24,7 +24,7 @@ public class Enrollment {
     public Enrollment() {
     }
 
-    public Enrollment(ApplicationUser user, Course course) {
+    public Enrollment(User user, Course course) {
         Assert.state(Objects.nonNull(user), "user cannot be null");
         Assert.state(Objects.nonNull(course), "course cannot be null");
         this.user = user;

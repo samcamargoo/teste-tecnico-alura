@@ -6,7 +6,7 @@ import com.sam.alura.course.EnrollCourseRequest;
 import com.sam.alura.course.EnrollmentRepository;
 import com.sam.alura.exceptions.AppException;
 import com.sam.alura.helper.SystemHelper;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import jakarta.persistence.EntityManager;
 import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
@@ -42,7 +42,7 @@ public class EnrollCourseValidator implements Validator {
         EnrollCourseRequest enrollCourseRequest = (EnrollCourseRequest) target;
 
         Long userId = SystemHelper.getUserID();
-        ApplicationUser user = entityManager.find(ApplicationUser.class, userId);
+        User user = entityManager.find(User.class, userId);
         Assert.state(Objects.nonNull(user), "user not found");
 
         boolean alreadyJoined = enrollmentRepository.existsByUserIdAndCourseId(user.getId(), enrollCourseRequest.courseId());

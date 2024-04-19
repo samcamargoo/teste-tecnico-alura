@@ -6,10 +6,10 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = UniqueValidator.class)
+@Constraint(validatedBy = UniqueFieldValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Unique {
+@Target({ElementType.FIELD})
+public @interface UniqueField {
 
     String message() default "already exists";
     Class<?>[] groups() default {};

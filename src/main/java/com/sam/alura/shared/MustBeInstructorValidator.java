@@ -1,7 +1,7 @@
 package com.sam.alura.shared;
 
 import com.sam.alura.exceptions.AppException;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import com.sam.alura.user.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -22,7 +22,7 @@ public class MustBeInstructorValidator implements ConstraintValidator<MustBeInst
             return true;
         }
         Long instructorId = (Long) value;
-        ApplicationUser userEntity = userRepository.findById(instructorId).orElseThrow(() -> new AppException("instructor not found"));
+        User userEntity = userRepository.findById(instructorId).orElseThrow(() -> new AppException("instructor not found"));
 
         return userEntity.isInstructor();
     }

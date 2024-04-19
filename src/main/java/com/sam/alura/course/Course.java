@@ -1,6 +1,6 @@
 package com.sam.alura.course;
 
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import jakarta.persistence.*;
 import org.springframework.util.Assert;
 
@@ -22,7 +22,7 @@ public class Course {
     @Column(unique = true, length = 10)
     private String code;
     @ManyToOne(fetch = FetchType.LAZY)
-    private ApplicationUser instructor;
+    private User instructor;
     private String description;
 
     @OneToMany(mappedBy = "course")
@@ -36,7 +36,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(String name, String code, ApplicationUser user, String description) {
+    public Course(String name, String code, User user, String description) {
         Assert.state(user.isInstructor(), user.getName() + " is not an instructor");
 
         Assert.hasLength(name, "course name is required");
@@ -68,7 +68,7 @@ public class Course {
         return code;
     }
 
-    public ApplicationUser getInstructor() {
+    public User getInstructor() {
         return instructor;
     }
 

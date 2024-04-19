@@ -2,7 +2,7 @@ package com.sam.alura.course;
 
 import com.sam.alura.helper.SystemHelper;
 import com.sam.alura.shared.ExistsById;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.util.Assert;
 
@@ -15,10 +15,10 @@ public record EnrollCourseRequest(
         Long courseId) {
 
 
-    public Enrollment toModel(Function<Long, Course> loadCourse, Function<Long, ApplicationUser> loadUser) {
+    public Enrollment toModel(Function<Long, Course> loadCourse, Function<Long, User> loadUser) {
 
         Long userId = SystemHelper.getUserID();
-        ApplicationUser user = loadUser.apply(userId);
+        User user = loadUser.apply(userId);
         Course course = loadCourse.apply(courseId);
 
         Assert.state(Objects.nonNull(user), "User not found");

@@ -1,6 +1,6 @@
 package com.sam.alura.course;
 
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import jakarta.persistence.*;
 import org.springframework.util.Assert;
 
@@ -18,7 +18,7 @@ public class CourseRating {
     @ManyToOne(fetch = FetchType.LAZY)
     private Course course;
     @ManyToOne(fetch = FetchType.LAZY)
-    private ApplicationUser rater;
+    private User rater;
 
     private String reason;
     private int rating;
@@ -29,7 +29,7 @@ public class CourseRating {
     public CourseRating() {
     }
 
-    public CourseRating(Course course, ApplicationUser rater, String reason, int rating) {
+    public CourseRating(Course course, User rater, String reason, int rating) {
         Assert.state(Objects.nonNull(course), "course can't be null");
         Assert.state(Objects.nonNull(rater), "rater can't be null");
         this.course = course;
@@ -47,7 +47,7 @@ public class CourseRating {
         return course;
     }
 
-    public ApplicationUser getRater() {
+    public User getRater() {
         return rater;
     }
 
