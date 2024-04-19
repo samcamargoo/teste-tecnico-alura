@@ -24,8 +24,8 @@ class CreateUserController {
     @PostMapping
     @Transactional
     ResponseEntity<?> createUser(@RequestBody @Valid NewUserRequest request) {
-        ApplicationUser userEntity = request.toModel(roleRepository);
-        entityManager.persist(userEntity);
+        User user = request.toModel(roleRepository);
+        entityManager.persist(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

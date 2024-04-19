@@ -12,7 +12,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "tb_users")
-public class ApplicationUser  {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +33,10 @@ public class ApplicationUser  {
     private List<Role> roles = new ArrayList<>();
 
     @Deprecated
-    public ApplicationUser() {
+    public User() {
     }
 
-    public ApplicationUser(String name, String username, String email, CleanPassword cleanPassword, Role role) {
+    public User(String name, String username, String email, CleanPassword cleanPassword, Role role) {
         Assert.hasLength(name, "name cannot be empty");
         Assert.state(Objects.nonNull(name), "name cannot be null");
 
@@ -98,7 +98,7 @@ public class ApplicationUser  {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ApplicationUser userEntity = (ApplicationUser) o;
+        User userEntity = (User) o;
         return Objects.equals(username, userEntity.username) && Objects.equals(email, userEntity.email);
     }
 

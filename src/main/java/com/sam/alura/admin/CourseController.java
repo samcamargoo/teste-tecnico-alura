@@ -2,7 +2,7 @@ package com.sam.alura.admin;
 
 import com.sam.alura.course.*;
 import com.sam.alura.exceptions.AppException;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -34,7 +34,7 @@ public class CourseController {
     @Secured("ROLE_ADMIN")
     @Transactional
     ResponseEntity<?> createCourse(@RequestBody @Valid NewCourseRequest request) {
-        Course course = request.toModel(id -> entityManager.find(ApplicationUser.class, id));
+        Course course = request.toModel(id -> entityManager.find(User.class, id));
         entityManager.persist(course);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

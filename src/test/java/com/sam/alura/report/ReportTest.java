@@ -1,7 +1,7 @@
 package com.sam.alura.report;
 
 import com.sam.alura.course.*;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import com.sam.alura.user.CleanPassword;
 import com.sam.alura.user.Role;
 import com.sam.alura.user.RoleType;
@@ -34,17 +34,17 @@ public class ReportTest {
 
         CleanPassword password = new CleanPassword("123");
 
-        ApplicationUser instructor = new ApplicationUser("Samuel", "samcamargo", "sam-camargo@live.com", password, role);
+        User instructor = new User("Samuel", "samcamargo", "sam-camargo@live.com", password, role);
         Course course = new Course("java", "code", instructor, "123");
 
-        ApplicationUser applicationUser = new ApplicationUser("Samuel", "samcamargo", "sam-camargo@live.com", password, roleStudent);
-        ApplicationUser applicationUser1 = new ApplicationUser("camargo", "samcamargo", "sam-camargo@live.com", password, roleStudent);
-        ApplicationUser applicationUser2 = new ApplicationUser("camargo", "samcamargo", "sam-camargo@live.com", password, roleStudent);
+        User user = new User("Samuel", "samcamargo", "sam-camargo@live.com", password, roleStudent);
+        User user1 = new User("camargo", "samcamargo", "sam-camargo@live.com", password, roleStudent);
+        User user2 = new User("camargo", "samcamargo", "sam-camargo@live.com", password, roleStudent);
 
         List<CourseRating> courseRatings = Arrays.asList(
-                new CourseRating(course, applicationUser, "bad", 9),
-                new CourseRating(course, applicationUser1, "bad", 5),
-                new CourseRating(course, applicationUser2, "bad", 10)
+                new CourseRating(course, user, "bad", 9),
+                new CourseRating(course, user1, "bad", 5),
+                new CourseRating(course, user2, "bad", 10)
         );
 
         Mockito.when(courseRatingRepository.findAllByCourseId(course.getId())).thenReturn(courseRatings);

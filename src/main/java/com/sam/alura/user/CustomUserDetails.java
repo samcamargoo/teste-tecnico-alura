@@ -7,10 +7,10 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private ApplicationUser user;
+    private User user;
     private Long id;
 
-    public CustomUserDetails(ApplicationUser user) {
+    public CustomUserDetails(User user) {
         this.user = user;
         this.id = user.getId();
 

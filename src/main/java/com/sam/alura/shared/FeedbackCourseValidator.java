@@ -5,7 +5,7 @@ import com.sam.alura.course.EnrollmentRepository;
 import com.sam.alura.course.NewFeedBackRequest;
 import com.sam.alura.exceptions.AppException;
 import com.sam.alura.helper.SystemHelper;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import com.sam.alura.user.UserRepository;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -34,7 +34,7 @@ public class FeedbackCourseValidator implements Validator {
 
         NewFeedBackRequest request = (NewFeedBackRequest) target;
         String username = SystemHelper.getUsername();
-        ApplicationUser user = userRepository.findUserByUsername(username).orElseThrow(() -> new AppException("username not found"));
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new AppException("username not found"));
         boolean isEnroled = enrollmentRepository.existsByUserIdAndCourseId(user.getId(), request.courseId());
 
 

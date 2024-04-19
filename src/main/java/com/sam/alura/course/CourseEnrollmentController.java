@@ -1,7 +1,7 @@
 package com.sam.alura.course;
 
 import com.sam.alura.shared.EnrollCourseValidator;
-import com.sam.alura.user.ApplicationUser;
+import com.sam.alura.user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -42,7 +42,7 @@ class CourseEnrollmentController {
 
         Enrollment enrollment = request.toModel(
                 courseId -> entityManager.find(Course.class, courseId),
-                userId -> entityManager.find(ApplicationUser.class, userId));
+                userId -> entityManager.find(User.class, userId));
 
         enrollmentRepository.save(enrollment);
         return ResponseEntity.status(HttpStatus.CREATED).build();
