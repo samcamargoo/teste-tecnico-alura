@@ -8,7 +8,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.util.Assert;
 import java.util.List;
 
-public class UniqueValidator implements ConstraintValidator<Unique, Object> {
+public class UniqueFieldValidator implements ConstraintValidator<UniqueField, Object> {
 
     private String domainAttribute;
     private Class<?> clazz;
@@ -17,7 +17,7 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
     private EntityManager entityManager;
 
     @Override
-    public void initialize(Unique params) {
+    public void initialize(UniqueField params) {
         domainAttribute = params.fieldName();
         clazz = params.domainClass();
     }
